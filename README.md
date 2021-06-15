@@ -1,7 +1,8 @@
 # test
 How to Open
-1.open first cmd
-2.type yarn start
-3.open second cmd
-4.type cd server
-5.type nodemon index.js
+1.import database in server folder
+2.open first cmd
+3.type yarn start
+4.open second cmd
+5.type cd server
+6.type nodemon index.js
