@@ -5,7 +5,7 @@
 -- Dumped from database version 13.3
 -- Dumped by pg_dump version 13.3
 
--- Started on 2021-06-14 22:19:50
+-- Started on 2021-06-15 17:37:01
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -56,12 +56,53 @@ CREATE SEQUENCE public.customer_customerid_seq
 ALTER TABLE public.customer_customerid_seq OWNER TO postgres;
 
 --
--- TOC entry 3003 (class 0 OID 0)
+-- TOC entry 3015 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: customer_customerid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.customer_customerid_seq OWNED BY public.customer.customerid;
+
+
+--
+-- TOC entry 205 (class 1259 OID 24578)
+-- Name: logging; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.logging (
+    log_id integer NOT NULL,
+    userid integer NOT NULL,
+    date timestamp without time zone NOT NULL,
+    process text,
+    log text
+);
+
+
+ALTER TABLE public.logging OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 24576)
+-- Name: logging_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.logging_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.logging_log_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3016 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: logging_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.logging_log_id_seq OWNED BY public.logging.log_id;
 
 
 --
@@ -96,7 +137,7 @@ CREATE SEQUENCE public.user_userid_seq
 ALTER TABLE public.user_userid_seq OWNER TO postgres;
 
 --
--- TOC entry 3004 (class 0 OID 0)
+-- TOC entry 3017 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: user_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -105,7 +146,7 @@ ALTER SEQUENCE public.user_userid_seq OWNED BY public.users.userid;
 
 
 --
--- TOC entry 2859 (class 2604 OID 16411)
+-- TOC entry 2866 (class 2604 OID 16411)
 -- Name: customer customerid; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -113,7 +154,15 @@ ALTER TABLE ONLY public.customer ALTER COLUMN customerid SET DEFAULT nextval('pu
 
 
 --
--- TOC entry 2858 (class 2604 OID 16400)
+-- TOC entry 2867 (class 2604 OID 24581)
+-- Name: logging log_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.logging ALTER COLUMN log_id SET DEFAULT nextval('public.logging_log_id_seq'::regclass);
+
+
+--
+-- TOC entry 2865 (class 2604 OID 16400)
 -- Name: users userid; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -121,7 +170,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN userid SET DEFAULT nextval('public.us
 
 
 --
--- TOC entry 2997 (class 0 OID 16408)
+-- TOC entry 3007 (class 0 OID 16408)
 -- Dependencies: 203
 -- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -130,12 +179,23 @@ COPY public.customer (customerid, customername, customersurname, email, tel, sta
 50	kkk	negro	666@satan.com	666	Reviewed
 49	Varakorn	Punyanirun	iuljo@hotmail.com	191	Approved
 51	asdaa	qqwezz	olljolp@you.com	1161	Submitted
-53	asdxzc	oipou	poioip@viu.com	99352662	Approved
+53	asdxzc	oipou	poioip@viu.com	1111111	Approved
+69	xczxczx	xzczx	xcvxv@hotmail.com	99352662	Submitted
 \.
 
 
 --
--- TOC entry 2995 (class 0 OID 16397)
+-- TOC entry 3009 (class 0 OID 24578)
+-- Dependencies: 205
+-- Data for Name: logging; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.logging (log_id, userid, date, process, log) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3005 (class 0 OID 16397)
 -- Dependencies: 201
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -147,16 +207,25 @@ COPY public.users (userid, email, password, admin) FROM stdin;
 
 
 --
--- TOC entry 3005 (class 0 OID 0)
+-- TOC entry 3018 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: customer_customerid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.customer_customerid_seq', 53, true);
+SELECT pg_catalog.setval('public.customer_customerid_seq', 69, true);
 
 
 --
--- TOC entry 3006 (class 0 OID 0)
+-- TOC entry 3019 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: logging_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.logging_log_id_seq', 8, true);
+
+
+--
+-- TOC entry 3020 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: user_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -165,7 +234,7 @@ SELECT pg_catalog.setval('public.user_userid_seq', 2, true);
 
 
 --
--- TOC entry 2863 (class 2606 OID 16416)
+-- TOC entry 2871 (class 2606 OID 16416)
 -- Name: customer customer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -174,7 +243,16 @@ ALTER TABLE ONLY public.customer
 
 
 --
--- TOC entry 2861 (class 2606 OID 16405)
+-- TOC entry 2873 (class 2606 OID 24586)
+-- Name: logging logging_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.logging
+    ADD CONSTRAINT logging_pkey PRIMARY KEY (log_id);
+
+
+--
+-- TOC entry 2869 (class 2606 OID 16405)
 -- Name: users user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -182,7 +260,7 @@ ALTER TABLE ONLY public.users
     ADD CONSTRAINT user_pkey PRIMARY KEY (userid);
 
 
--- Completed on 2021-06-14 22:19:50
+-- Completed on 2021-06-15 17:37:01
 
 --
 -- PostgreSQL database dump complete
