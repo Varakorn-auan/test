@@ -1,0 +1,4 @@
+POST  http://localhost:5000/customer/49
+Content-Type: application/json
+
+{ "email":"test@test.com" }

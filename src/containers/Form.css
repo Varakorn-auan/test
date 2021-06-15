@@ -1,0 +1,9 @@
+@media all and (min-width: 480px) {
+    .Info {
+      padding: 60px 0;
+    }
+    .Info form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  }

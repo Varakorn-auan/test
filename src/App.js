@@ -1,15 +1,16 @@
-import React, { Component } from 'react'
-import LoginForm from './components/LoginForm'
-import './App.css'
+import React, { Fragment } from "react";
+import "./App.css";
+import Routes from "./route";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <LoginForm />
+function App() {
+  return (
+    <Fragment>
+      <div className="container">
+      <Routes />
+        
       </div>
-    )
-  }
+    </Fragment>
+  );
 }
 
-export default App
+export default App;
