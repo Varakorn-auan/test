@@ -7,5 +7,5 @@ How to Open
 5.type cd server
 6.type nodemon index.js
 
-admin:admin@test.com password
-user:test@test.com 1234
+admin:admin@test.com password:password
+user:test@test.com password:1234
