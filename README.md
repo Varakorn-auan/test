@@ -6,3 +6,6 @@ How to Open
 4.open second cmd
 5.type cd server
 6.type nodemon index.js
+
+admin:admin@test.com password
+user:test@test.com 1234
